@@ -11,7 +11,7 @@ export const componentsByNetworkId: Record<
 > = {
   testnet: {
     home: "near-examples.testnet/widget/HelloNEAR",
-    profileSocial: "aloin.testnet/widget/ProfileSocial",
+    profileSocial: "aloin.testnet/widget/NearFollowButton",
   },
 
   mainnet: {

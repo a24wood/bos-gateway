@@ -5,10 +5,5 @@ interface Props {
 }
 
 export function SimpleLayout({ children }: Props) {
-  return (
-    <div className="h-full">
-      {children}
-      <script src="https://cdn.tailwindcss.com"></script>
-    </div>
-  );
+  return <div className="h-full">{children}</div>;
 }

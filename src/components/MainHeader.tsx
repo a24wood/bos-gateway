@@ -33,7 +33,7 @@ export const MainHeader = () => {
   const { requestAuthentication } = useSignInRedirect();
 
   return (
-    <Header>
+    <Header className="flex-1 flex justify-center container mx-auto max-w-xl">
       {signedIn ? (
         <>
           <Text>Welcome, {accountId}!</Text>
