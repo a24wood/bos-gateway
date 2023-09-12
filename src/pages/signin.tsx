@@ -1,22 +1,24 @@
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import styled from 'styled-components';
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import styled from "styled-components";
 
-import { Button } from '@/components/lib/Button';
-import { openToast } from '@/components/lib/Toast';
-import { useDefaultLayout } from '@/hooks/useLayout';
-import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-import { useAuthStore } from '@/stores/auth';
-import type { NextPageWithLayout } from '@/utils/types';
+import { Button } from "@/components/lib/Button";
+import { openToast } from "@/components/lib/Toast";
+import { useDefaultLayout, useSimpleLayout } from "@/hooks/useLayout";
+import { useSignInRedirect } from "@/hooks/useSignInRedirect";
+import { useAuthStore } from "@/stores/auth";
+import type { NextPageWithLayout } from "@/utils/types";
 
-import { handleCreateAccount } from '../utils/auth';
-import { isValidEmail } from '../utils/form-validation';
+import { handleCreateAccount } from "../utils/auth";
+import { isValidEmail } from "../utils/form-validation";
 
 const SignInPage: NextPageWithLayout = () => {
   const { register, handleSubmit, setValue } = useForm();
   const router = useRouter();
-  const requestSignInWithWallet = useAuthStore((store) => store.requestSignInWithWallet);
+  const requestSignInWithWallet = useAuthStore(
+    (store) => store.requestSignInWithWallet
+  );
   const signedIn = useAuthStore((store) => store.signedIn);
   const { redirect } = useSignInRedirect();
 
@@ -30,20 +32,26 @@ const SignInPage: NextPageWithLayout = () => {
     if (!data.email) return;
 
     try {
-      const { publicKey, email } = await handleCreateAccount(null, data.email, true);
-      router.push(`/verify-email?publicKey=${publicKey}&email=${email}&isRecovery=true`);
+      const { publicKey, email } = await handleCreateAccount(
+        null,
+        data.email,
+        true
+      );
+      router.push(
+        `/verify-email?publicKey=${publicKey}&email=${email}&isRecovery=true`
+      );
     } catch (error: any) {
       console.log(error);
 
-      if (typeof error?.message === 'string') {
+      if (typeof error?.message === "string") {
         openToast({
-          type: 'ERROR',
+          type: "ERROR",
           title: error.message,
         });
       } else {
         openToast({
-          type: 'ERROR',
-          title: 'Something went wrong',
+          type: "ERROR",
+          title: "Something went wrong",
         });
       }
     }
@@ -53,19 +61,22 @@ const SignInPage: NextPageWithLayout = () => {
     <StyledContainer>
       <FormContainer onSubmit={onSubmit}>
         <header>
-          <h1>{'Sign In'}</h1>
-          <p className="desc">Use this account to sign in everywhere on NEAR, no password required.</p>
+          <h1>{"Sign In"}</h1>
+          <p className="desc">
+            Use this account to sign in everywhere on NEAR, no password
+            required.
+          </p>
         </header>
 
         <InputContainer>
           <label htmlFor="email">Email</label>
 
           <input
-            {...register('email', {
-              required: 'Please enter a valid email address',
+            {...register("email", {
+              required: "Please enter a valid email address",
             })}
             onChange={(e) => {
-              setValue('email', e.target.value);
+              setValue("email", e.target.value);
               if (!isValidEmail(e.target.value)) return;
             }}
             placeholder="user_name@email.com"
@@ -74,13 +85,23 @@ const SignInPage: NextPageWithLayout = () => {
           />
         </InputContainer>
 
-        <Button type="submit" label="Continue" variant="affirmative" onClick={onSubmit} />
-        <Button type="button" label="Continue with wallet" variant="primary" onClick={requestSignInWithWallet} />
+        <Button
+          type="submit"
+          label="Continue"
+          variant="affirmative"
+          onClick={onSubmit}
+        />
+        <Button
+          type="button"
+          label="Continue with wallet"
+          variant="primary"
+          onClick={requestSignInWithWallet}
+        />
       </FormContainer>
     </StyledContainer>
   );
 };
-SignInPage.getLayout = useDefaultLayout;
+SignInPage.getLayout = useSimpleLayout;
 
 export default SignInPage;
 

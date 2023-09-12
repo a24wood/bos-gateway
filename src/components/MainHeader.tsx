@@ -17,7 +17,7 @@ const Header = styled.header`
     background: #000;
     color: #fff;
     padding: 0.3rem 1rem;
-    border-radius: 10rem;
+    border-radius: 5px;
     cursor: pointer;
   }
 `;
@@ -34,17 +34,9 @@ export const MainHeader = () => {
 
   return (
     <Header>
-      <Logo>
-        <Link href="/">
-          <Image src={LogoBlack} alt="NEAR" />
-        </Link>
-      </Logo>
-
-      <Link href="/">Home</Link>
-
       {signedIn ? (
         <>
-          <Text>{accountId}</Text>
+          <Text>Welcome, {accountId}!</Text>
           <button type="button" onClick={logOut}>
             Log Out
           </button>
