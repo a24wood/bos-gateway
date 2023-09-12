@@ -4,18 +4,18 @@ import type { NextPageWithLayout } from "@/utils/types";
 import { ComponentWrapperPage } from "@/components/ComponentWrapperPage";
 import { useAuthStore } from "@/stores/auth";
 import { useSignInRedirect } from "@/hooks/useSignInRedirect";
+import { useRouter } from "next/router";
 
-const HomePage: NextPageWithLayout = () => {
+const ConnectPage: NextPageWithLayout = () => {
   const components = useBosComponents();
   const { requestAuthentication } = useSignInRedirect();
 
-  const signedIn = useAuthStore((store) => store.signedIn);
-  const accountId = useAuthStore((store) => store.accountId);
-  const logOut = useAuthStore((store) => store.logOut);
-  return <div>Test</div>;
-  // return <ComponentWrapperPage src={components.} />;
+  const router = useRouter();
+  return <p>Post: {router.query.slug}</p>;
+
+  return <ComponentWrapperPage src={components.test} />;
 };
 
-HomePage.getLayout = useDefaultLayout;
+ConnectPage.getLayout = useDefaultLayout;
 
-export default HomePage;
+export default ConnectPage;

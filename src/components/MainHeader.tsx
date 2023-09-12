@@ -1,10 +1,10 @@
-import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-import { useAuthStore } from '@/stores/auth';
-import Image from 'next/image';
-import Link from 'next/link';
-import styled from 'styled-components';
-import LogoBlack from '@/assets/images/near-logo-black.svg';
-import { Text } from './lib/Text';
+import { useSignInRedirect } from "@/hooks/useSignInRedirect";
+import { useAuthStore } from "@/stores/auth";
+import Image from "next/image";
+import Link from "next/link";
+import styled from "styled-components";
+import LogoBlack from "@/assets/images/near-logo-black.svg";
+import { Text } from "./lib/Text";
 
 const Header = styled.header`
   background: #fff;

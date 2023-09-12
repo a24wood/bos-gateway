@@ -1,15 +1,21 @@
-import type { NetworkId } from '@/utils/types';
+import type { NetworkId } from "@/utils/types";
 
 type NetworkComponents = {
   home: string;
+  profileSocial: string;
 };
 
-export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefined> = {
+export const componentsByNetworkId: Record<
+  NetworkId,
+  NetworkComponents | undefined
+> = {
   testnet: {
-    home: 'near-examples.testnet/widget/HelloNEAR',
+    home: "near-examples.testnet/widget/HelloNEAR",
+    profileSocial: "aloin.testnet/widget/ProfileSocial",
   },
 
   mainnet: {
-    home: '',
+    home: "",
+    profileSocial: "aloin.near/widget/ProfileSocial",
   },
 };
